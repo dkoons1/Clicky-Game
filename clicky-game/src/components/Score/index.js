@@ -1,9 +1,12 @@
 import React from "react";
+import "./style.css";
 
-Score = props => {
+function Score(props){
   return (
-        <h1 className="title"> Score: {props.score}</h1>
-
+   <div className="gameWrap">
+    <h1 className="score"> Score: {props.score}</h1>  
+    <h2 className="score">{props.message}</h2>
+  </div>
   );
 }
 

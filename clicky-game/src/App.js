@@ -10,7 +10,8 @@ class App extends Component {
   state = {
     friends,
     clickedFriends: [],
-    score: 0
+    score: 0,
+    message: ""
   };
 
   // removeFriend = id => {
@@ -24,18 +25,18 @@ class App extends Component {
   shuffleDeck = id => {
     let clickedFriends = this.state.clickedFriends
        if(clickedFriends.includes(id)){
-         this.setState({ clickedFriends: [], score: 0});
+         this.setState({ clickedFriends: [], score: 0, message: "Oh no! You lost!"});
          console.log("you lose")
          return;
        }
        else {
          clickedFriends.push(id)
         if(clickedFriends.length == 12){
-          this.setState({score: 12, clickedFriends: []})
+          this.setState({score: 0, clickedFriends: [], message: "Good job! You Won!"})
           console.log("winner")
           return;
         }
-        this.setState({ friends, clickedFriends, score: this.state.score + 1})
+        this.setState({ friends, clickedFriends, score: this.state.score + 1, message: ""})
 
         friends.sort((a,b) => 0.5 - Math.random());
        }
@@ -48,7 +49,7 @@ class App extends Component {
     return (
       <Wrapper>
         <Title>Friends List</Title>
-        <Score score={this.state.score}/>
+        <Score score={this.state.score} message={this.state.message}/>
         {this.state.friends.map(friend => (
           <FriendCard
             shuffleDeck={this.shuffleDeck}
